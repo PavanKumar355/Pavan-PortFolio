@@ -4,296 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <style>
-        /* Base Styles */
-      
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .about-content {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            text-align: left; /* Ensure text is aligned to the left */
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .avatar img {
-            width: 10px;
-            height: 10px;
-            
-        }
-
-        .about-text {
-            flex: 1; /* Make the text take available space */
-        }
-
-        .about-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .about-buttons a {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: 1px solid black;
-            color: black;
-            font-size: 14px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .about-buttons a:hover {
-            background-color: black;
-            color: #fff;
-        }
-
-        body.dark .about-buttons a {
-    background-color: #FEBA01;
-    color: #000; /* Black text color */
-    border-color: #000; /* Black border */
-}
-
-body.dark .about-buttons a:hover {
-    background-color: white; /* Black background on hover */
-    color: black; /* White text on hover */
-}
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f9;
-            color: #333;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.dark {
-            background-color: #121212;
-            color: #d1d1d1;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Scroll Progress Bar */
-        #progressBar {
-            height: 4px;
-            background-color:#FEBA01;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0;
-            z-index: 1000;
-        }
-
-        /* Header */
-        header {
-            background-color: #fff;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: background-color 0.3s;
-        }
-      
-
-        header.dark {
-            background-color: #1f1f1f;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap:40px;
-        }
-
-        nav ul li button {
-            background: none;
-            /* background-color: black;
-            border-radius: 10px; */
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            color: rgb(7, 7, 7);
-            transition: color 0.3s;
-            padding: 10px;
-        }
-
-        nav ul li button:hover {
-            color: black;
-            
-            border-radius: 5px;
-            background-color: #FEBA01;
-            box-shadow: 2px 2px 5px gray;
-        }
-
-        .toggle-container {
-            position: relative;
-            width: 50px;
-            height: 25px;
-            background: #ddd;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-
-        .toggle-container.dark {
-            background: black;
-        }
-
-        .toggle-circle {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 19px;
-            height: 19px;
-            background: #fff;
-            border-radius: 50%;
-            transition: left 0.3s;
-        }
-
-        .toggle-container.dark .toggle-circle {
-            left: 26px;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-    
-        .card {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            padding: 50px;
-            margin: 20px auto;
-            width: 70%;
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .dark .card {
-            background-color: #1f1f1f;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .skills-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 15px 0;
-    position: relative;
-}
-
-.skills-bar label {
-    min-width: 100px;
-    font-weight: bold;
-}
-
-.bar-container {
-    flex: 1;
-    height: 20px;
-    background-color: #ddd;
-    position: relative;
-    border-radius: 5px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-.bar-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: var(--fill);
-    background-color: #FEBA01;
-    border-radius: 5px;
-    z-index: 1;
-    transition: width 0.3s ease;
-}
-
-.percentage {
-    position: absolute;
-    right: 10px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #333;
-    z-index: 2;
-}
-
-body.dark .bar-container::after {
-    background-color: #FEBA01; /* Yellow for dark mode */
-}
-        .list-item {
-            margin: 10px 0;
-        }
-
-        .list-item strong {
-            font-weight: bold;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #fff;
-            border-top: 1px solid #ddd;
-        }
-
-        .dark footer {
-            background-color: #1f1f1f;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .card {
-                width: 90%;
-            }
-
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .about-content {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Scroll Progress Bar -->
@@ -301,18 +12,21 @@ body.dark .bar-container::after {
 
     <!-- Header -->
     <header>
-        <nav>
-            <ul>
-                <li><button onclick="scrollToSection('about')">About</button></li>
-                <li><button onclick="scrollToSection('experience')">Experience</button></li>
-                <li><button onclick="scrollToSection('projects')">Projects</button></li>
-                <li><button onclick="scrollToSection('education')">Education</button></li>
-                <li><button onclick="scrollToSection('skills')">Skills</button></li>
-                <li><button onclick="scrollToSection('contact')">Contact</button></li>
-            </ul>
-        </nav>
-        <div id="themeToggle" class="toggle-container">
-            <div class="toggle-circle"></div>
+        <div class="header-inner">
+            <nav>
+                <ul>
+                    <li><button onclick="scrollToSection('about')">About</button></li>
+                    <li><button onclick="scrollToSection('experience')">Experience</button></li>
+                    <li><button onclick="scrollToSection('projects')">Projects</button></li>
+                    <li><button onclick="scrollToSection('education')">Education</button></li>
+                    <li><button onclick="scrollToSection('certifications')">Certifications</button></li>
+                    <li><button onclick="scrollToSection('skills')">Skills</button></li>
+                    <li><button onclick="scrollToSection('contact')">Contact</button></li>
+                </ul>
+            </nav>
+            <div id="themeToggle" class="toggle-container">
+                <div class="toggle-circle"></div>
+            </div>
         </div>
     </header>
 
@@ -325,7 +39,7 @@ body.dark .bar-container::after {
                     <img src="KN_logo_Icon (1).png" height="120px" width="120px" alt="pavan kumar">
                 </div> -->
                 <div class="about-text">
-                    <h1>C PAVAN KUMAR</h1>
+                    <h1><i>C PAVAN KUMAR</i></h1>
                     <p> Seeking an entry-level software engineering position to leverage my coding and problem-solving skills. Eager to
                         contribute to real-world projects, collaborate with experienced professionals, and drive organizational success.</p>
                 </div>
@@ -335,116 +49,257 @@ body.dark .bar-container::after {
                     <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width: 16px;">
                     LinkedIn
                 </a>
+                <a href="mailto:pavankumar934777@gmail.com">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" style="width: 16px;">
+                    Email
+                </a>
                 <a href="https://github.com/PavanKumar355" target="_blank">
                     <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" style="width: 16px;">
                     GitHub
+                </a>
+                <a href="tel:+919347773554">
+                    <img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="Phone" style="width: 16px;">
+                    +91 9347773554
                 </a>
             </div>
         </div>
 
         <!-- Experience Section -->
-        <!-- <div class="card" id="experience">
-            <h2>Work Experience</h2> <hr><br>
-            <p><strong> <li>KODNEST TECHNOLOGIES | Jan. 2024 - May 2024 </li></strong></p>
-            <p><i><strong>Software Developer</strong></i></p><br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga architecto neque asperiores deleniti ex, maiores dolores porro! Voluptate, culpa veritatis?</p> <br>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi necessitatibus at quas eius illo, dolore consectetur ipsa quis alias error, repudiandae voluptatum. Blanditiis nihil libero fugit odio a, pariatur dolore.</p>
-        </div> -->
+        <div class="card" id="experience">
+            <h2>Experience</h2>
+            <hr><br>
+
+            <div class="experience-item">
+                <h3>Intern — KodNest Technologies <span class="meta">Nov 2024 - Jun 2025</span></h3>
+                <p>Worked on backend APIs and authentication for an employee management solution during a hands-on training internship.</p>
+                <ul>
+                    <li>Developed REST APIs using Java &amp; Spring Boot for employee CRUD operations and search endpoints.</li>
+                    <li>Integrated Spring Security for secure email/password authentication and role-based access.</li>
+                    <li>Implemented JDBC-backed persistence and optimized SQL queries to improve response times.</li>
+                    <li>Documented APIs with Postman, wrote test collections, and collaborated using Git feature branches.</li>
+                </ul>
+                                <p class="tech">Tech:
+                                    <span class="tech-badge">Java</span>
+                                    <span class="tech-badge">Spring Boot</span>
+                                    <span class="tech-badge">JDBC</span>
+                                    <span class="tech-badge">SQL</span>
+                                    <span class="tech-badge">HTML/CSS</span>
+                                </p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Employee Management System (Capstone Project) <span class="meta">Nov 2024 - Jun 2025</span></h3>
+                <p>Full-stack application demonstrating secure CRUD operations, validations, and a responsive UI.</p>
+                <ul>
+                    <li>Built backend REST APIs in Spring Boot and persisted data via JDBC to a SQL database.</li>
+                    <li>Implemented front-end forms (HTML/CSS) with client-side and server-side validation.</li>
+                    <li>Created Postman collection for QA; added basic unit tests for key endpoints.</li>
+                    <li>Published code to GitHub: <a href="https://github.com/PavanKumar355" target="_blank">repo</a> (link to project)</li>
+                </ul>
+                                <p class="tech">Tech:
+                                    <span class="tech-badge">Java</span>
+                                    <span class="tech-badge">Spring Boot</span>
+                                    <span class="tech-badge">JDBC</span>
+                                    <span class="tech-badge">SQL</span>
+                                    <span class="tech-badge">HTML/CSS</span>
+                                </p>
+            </div>
+        </div>
 
         <!-- Projects Section -->
         <div class="card" id="projects">
             <h2>Projects</h2><hr><br>
-                <li class="list-item;" >
-                   <strong>Quiz-APP</strong>
-                   <i><p><u>| HTML, CSS, JavaScript, ReactJS | 5/Jan/2025 - 26/Jan/2025</p></i></u> <br>
-                    <li>QuizApp is a ReactJS-based web application that allows users to take assessments by solving multiple-choice questions (MCQs). The application ensures a seamless user experience with validations, scoring, and a final result display.</li>
-                    <li><strong>Quiz: </strong> Users can solve MCQs one question at a time.
-                        Option Selection Validation: Users cannot proceed to the next question without selecting an option.</li>
-                        <li><strong>Scoring: </strong>Scores are calculated in real-time using a score state variable.
-                            Final Score Display: Once all questions are answered, users are presented with their final score.</li>
-                        <li><strong> Interface: </strong> The application provides a smooth and intuitive interface for taking quizzes.</li>
-                </li><br><hr><hr><hr>
-                <li class="list-item">
-                    <strong>TaskBuddy</strong>
-                    <p><i><u>| HTML, CSS, ReactJS,JavaScript | 3/Feb/2025 - 28/Feb/2025</u></i></p><br>
-                    <li>TaskBuddy is a task management app built with React. 
-                        It allows users to add, update, delete, and track their tasks with ease. 
-                        The app also includes a progress tracker and the ability to clear all tasks at once.
-                        </li>
-                    <li><strong>Add Tasks: </strong>Users can add new tasks to the list.
-                    <li><strong>Update Tasks:</strong> Users can edit the details of existing tasks.</li>
-                    <li><strong>Delete Tasks:</strong> Users can remove tasks from the list.</li>
-                    <li><strong>Clear All Tasks:</strong> Users can clear all tasks with a single click.</li>
-                    <li><strong>Tracker:</strong> Visual representation of the task completion status.</li></li>
-                    
-                </li><br> <hr><hr><hr>
-                <!-- <li class="list-item">
-                    <strong>RESPONSIVE UI</strong>
-                    <p><u><i>HTML, CSS, JavaScript | Jan 2024 - Aug 2024 </i></u></p> <br>
-                    <li>A collection of mini web applications showcasing various functionalities built using HTML, CSS, and
-                        JavaScript. This repository includes a range of projects designed to demonstrate different aspects of web
-                        development and interactive UI/UX design. Each project is aimed at providing hands-on experience with
-                        frontend technologies and solving common web development challenges.</li>
-                </li> -->
-            </ul>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://cdn-icons-png.flaticon.com/512/114/114915.png" alt="Quiz App">
+                    </div>
+                    <h3>Quiz-APP</h3>
+                    <p class="project-duration"><u>| HTML, CSS, JavaScript, ReactJS <br> Duration: 05/Jan/2025 - 26/Jan/2025</u></p>
+                    <p>QuizApp is a ReactJS-based web application that allows users to take assessments by solving multiple-choice questions (MCQs). The application ensures a seamless user experience with validations, scoring, and a final result display.</p>
+                    <ul class="project-features">
+                        <li><strong>Quiz:</strong> Users can solve MCQs one question at a time with option-validation.</li>
+                        <li><strong>Scoring:</strong> Real-time scoring and final score display.</li>
+                        <li><strong>Interface:</strong> Smooth and intuitive UI for taking quizzes.</li>
+                    </ul>
+                    <div class="tools-list">
+                        <span class="tool-badge">HTML</span>
+                        <span class="tool-badge">CSS</span>
+                        <span class="tool-badge">JavaScript</span>
+                        <span class="tool-badge">ReactJS</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="TaskBuddy">
+                    </div>
+                    <h3>TaskBuddy</h3>
+                    <p class="project-duration"><u>| HTML, CSS, ReactJS, JavaScript <br> Duration: 03/Feb/2025 - 28/Feb/2025</u></p>
+                    <p>TaskBuddy is a task management app built with React. It allows users to add, update, delete, and track their tasks with ease. The app includes a progress tracker and the ability to clear all tasks at once.</p>
+                    <ul class="project-features">
+                        <li><strong>Add Tasks:</strong> Add new tasks to the list.</li>
+                        <li><strong>Update Tasks:</strong> Edit existing tasks.</li>
+                        <li><strong>Delete/Clear:</strong> Remove tasks or clear all at once.</li>
+                    </ul>
+                    <div class="tools-list">
+                        <span class="tool-badge">HTML</span>
+                        <span class="tool-badge">CSS</span>
+                        <span class="tool-badge">JavaScript</span>
+                        <span class="tool-badge">ReactJS</span>
+                    </div>
+                </div>
+
+                <div class="project-card fullwidth">
+                    <div class="project-image">
+                        <img src="images/ems-icon.png" alt="Employee Management System">
+                    </div>
+                    <h3>Employee Management System</h3>
+                    <p class="project-duration"><u>| Java, Spring Boot, JDBC, SQL, HTML, CSS <br> Duration: May 2025 - Jun 2025</u></p>
+                    <p>Developed an Employee Management System with Java, Spring Boot, JDBC, and SQL. Implemented add, update, search, delete, and view features. Integrated secure email/password login using Spring Security. Created a user-friendly frontend with HTML and CSS.</p>
+                    <ul class="project-features">
+                        <li><strong>Features:</strong> Add, update, search, delete and view employee records.</li>
+                        <li><strong>Security:</strong> Spring Security-based authentication (email/password).</li>
+                        <li><strong>Backend:</strong> REST API built with Spring Boot and JDBC for SQL persistence.</li>
+                    </ul>
+                    <div class="tools-list">
+                        <span class="tool-badge">Java</span>
+                        <span class="tool-badge">Spring Boot</span>
+                        <span class="tool-badge">REST API</span>
+                        <span class="tool-badge">SQL</span>
+                        <span class="tool-badge">HTML</span>
+                        <span class="tool-badge">CSS</span>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <!-- Education Section -->
         <div class="card" id="education">
-            <h2>Education</h2><hr><br>
-            <ul>
-                <li><strong>Degree:</strong> Bachelor of Technology in Computer Science and Engineering<br><strong>Year: </strong> 2020 - 2024<br><strong>CGPA: </strong> 83%</li> <br>
-                <li><strong>Intermediate:</strong> MPC<br><strong>Year:</strong> 2018 - 2020<br><strong>Percentage: </strong> 94% </li><br>
+            <h2>Education</h2>
+            <hr>
+            <ul class="education-list">
+                <li class="edu-item">
+                    <div class="edu-row"><span class="label">Degree</span><span class="value">Bachelor of Technology in Computer Science and Engineering</span></div>
+                    <div class="edu-row"><span class="label">University</span><span class="value">Sri Venkateswara College Of Engineering And Technology (Autonomous), Chittoor</span></div>
+                    <div class="edu-row"><span class="label">Year</span><span class="value">2020 - 2024</span></div>
+                    <div class="edu-row"><span class="label">CGPA</span><span class="value">83%</span></div>
+                </li>
+
+                <li class="edu-item">
+                    <div class="edu-row"><span class="label">Intermediate</span><span class="value">MPC</span></div>
+                    <div class="edu-row"><span class="label">College</span><span class="value">Nalanda Junior College, Anantapur</span></div>
+                    <div class="edu-row"><span class="label">Year</span><span class="value">2018 - 2020</span></div>
+                    <div class="edu-row"><span class="label">Percentage</span><span class="value">94%</span></div>
+                </li>
+
+                <li class="edu-item">
+                    <div class="edu-row"><span class="label">SSC</span><span class="value">General</span></div>
+                    <div class="edu-row"><span class="label">School</span><span class="value">AP Model School, Settur</span></div>
+                    <div class="edu-row"><span class="label">Year</span><span class="value">2017 - 2018</span></div>
+                    <div class="edu-row"><span class="label">Percentage</span><span class="value">97%</span></div>
+                </li>
             </ul>
+        </div>
+
+        <!-- Certifications Section -->
+        <div class="card" id="certifications">
+            <h2>Certifications</h2><hr /><br />
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <div class="logo-wrapper">
+                        <img src="images/kodnest-technologies.png" alt="KodNest Technologies Logo" />
+                    </div>
+                    <div class="cert-content">
+                        <h3>Java Full Stack Development</h3>
+                        <p>KodNest Technologies</p>
+                        <span class="duration">Nov 2024 - Jun 2025</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="logo-wrapper">
+                        <img src="images/coursera.png" alt="Coursera Logo" />
+                    </div>
+                    <div class="cert-content">
+                        <h3>SQL</h3>
+                        <p>Coursera</p>
+                        <span class="duration">May 2024 - July 2024</span>
+                    </div>
+                </div>
+
+                <div class="cert-card">
+                    <div class="logo-wrapper">
+                        <img src="images/iidt.png" alt="IIDT Logo" />
+                    </div>
+                    <div class="cert-content">
+                        <h3>Web Development</h3>
+                        <p>IIDT, Tirupati</p>
+                        <span class="duration">Feb 2024 - April 2024</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Skills Section -->
         <div class="card" id="skills">
             <h2>Skills</h2>
             <hr><br>
-            <div class="skills-bar">
-                <label>Java</label>
-                <span class="bar-container" style="--fill: 60%;">
-                    <span class="percentage">80%</span>
-                </span>
-            </div>
-          
-            <div class="skills-bar">
-                <label>HTML5,CSS3 </label>
-                <span class="bar-container" style="--fill: 80%;">
-                    <span class="percentage">80%</span>
-                </span>
-            </div>
-            <div class="skills-bar">
-                <label>JavaScript</label>
-                <span class="bar-container" style="--fill: 60%;">
-                    <span class="percentage">60%</span>
-                </span>
-            </div>
-            
-            <div class="skills-bar">
-                <label>SQL</label>
-                <span class="bar-container" style="--fill: 85%;">
-                    <span class="percentage">85%</span>
-                </span>
-            </div>
-            <div class="skills-bar">
-                <label>MongoDB</label>
-                <span class="bar-container" style="--fill: 60%;">
-                    <span class="percentage">60%</span>
-                </span>
-            </div>
-            <div class="skills-bar">
-                <label>Spring Boot</label>
-                <span class="bar-container" style="--fill: 60%;">
-                    <span class="percentage">60%</span>
-                </span>
-            </div>
-            <div class="skills-bar">
-                <label>Selenium</label>
-                <span class="bar-container" style="--fill: 70%;">
-                    <span class="percentage">70%</span>
-                </span>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="Java">
+                    <label>Java</label>
+                </div>
+                
+                <div class="skill-item">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5">
+                    <label>HTML5</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3">
+                    <label>CSS3</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript">
+                    <label>JavaScript</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="React">
+                    <label>React.js</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://www.svgrepo.com/show/331760/sql-database-generic.svg" alt="SQL">
+                    <label>SQL</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring">
+                    <label>Spring</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="Spring Boot">
+                    <label>Spring Boot</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://hibernate.org/images/hibernate_icon_whitebkg.svg" alt="Hibernate">
+                    <label>Hibernate</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="JDBC">
+                    <label>JDBC</label>
+                </div>
+
+                <div class="skill-item">
+                    <img src="https://www.selenium.dev/images/selenium_logo_square_green.png" alt="Selenium">
+                    <label>Selenium</label>
+                </div>
             </div>
             
         </div>
@@ -452,9 +307,36 @@ body.dark .bar-container::after {
         
         <!-- Contact Section -->
         <div class="card" id="contact">
-            <h2>Contact</h2><hr><br>
-            <p>Email: <a href="mailto:tarun@example.com">pavankumar934777@gmail.com</a></p>
-            <p>Phone: +91 9347773554</p>
+            <h2>Contact</h2><hr>
+            <div class="contact-info">
+                <div class="contact-row">
+                    <div class="email-container">
+                        <a href="mailto:pavankumar934777@gmail.com" class="contact-button">
+                            <span class="button-content">
+                                <svg class="gmail-icon" viewBox="0 0 24 24" style="width:16px;height:16px;">
+                                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                                </svg>
+                                <span class="button-text">Email</span>
+                            </span>
+                        </a>
+                        <span class="email-address">pavankumar934777@gmail.com</span>
+                    </div>
+                </div>
+                <div class="contact-row">
+                    <div class="contact-phone">
+                        <a href="tel:+919347773554" class="contact-button">
+                            <span class="button-content">
+                                <img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" alt="Phone" style="width:16px;height:16px;">
+                                <span class="button-text">Phone</span>
+                            </span>
+                        </a>
+                        <span class="phone-number">+91 9347773554</span>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top: 20px;">
+                    <a class="resume-btn" href="https://drive.google.com/file/d/1qPjSkyX6ivSleiSghi2hgnwMJmfesEbb/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Download Resume</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -479,7 +361,7 @@ body.dark .bar-container::after {
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = (scrollTop / docHeight) * 100;
+            const scrolled = (docHeight > 0) ? (scrollTop / docHeight) * 100 : 0;
             progressBar.style.width = `${scrolled}%`;
         });
 
