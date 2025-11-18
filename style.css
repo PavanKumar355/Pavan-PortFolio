@@ -28,6 +28,47 @@ body.dark {
     color: #d1d1d1;
 }
 
+/* Live pastel background overlay (light, visible in both modes) - reduced yellow */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(200,235,255,0.62), transparent 12%),
+        radial-gradient(circle at 82% 78%, rgba(220,245,240,0.48), transparent 14%),
+        linear-gradient(135deg, rgba(225,235,255,0.06), rgba(200,235,240,0.04));
+    background-repeat: no-repeat;
+    background-size: 60% 60%, 50% 50%, 200% 200%;
+    background-position: 0% 0%, 100% 100%, 0% 0%;
+    filter: blur(36px) saturate(1.02);
+    opacity: 1;
+    transform: translateZ(0);
+    animation: bgShift 18s linear infinite;
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 0%, 100% 100%, 0% 0%; }
+    50% { background-position: 20% 14%, 80% 86%, 38% 62%; }
+    100% { background-position: 0% 0%, 100% 100%, 0% 0%; }
+}
+
+/* Dark mode: keep overlay subtle and cool-toned (no yellow) */
+body.dark::before {
+    background-image:
+        radial-gradient(circle at 15% 25%, rgba(140,180,220,0.06), transparent 10%),
+        radial-gradient(circle at 85% 75%, rgba(80,180,165,0.05), transparent 12%),
+        linear-gradient(135deg, rgba(30,40,60,0.02), rgba(12,30,35,0.01));
+    filter: blur(32px) saturate(0.85) contrast(0.96);
+    opacity: 0.9;
+}
+
+/* Respect reduced-motion accessibility preference */
+@media (prefers-reduced-motion: reduce) {
+    body::before { animation: none; }
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -165,6 +206,21 @@ nav ul li button:hover {
     box-shadow: 0 4px 16px rgba(254,186,1,0.13);
 }
 
+/* Active nav (persistent) - subtle teal accent */
+nav ul li button.nav-active {
+    background: rgba(0,206,168,0.12);
+    color: #004d44;
+    box-shadow: none;
+}
+
+/* Mobile nav active link */
+#mobileNav a.nav-active {
+    background: rgba(0,206,168,0.08);
+    color: #004d44;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
 @media (max-width: 768px) {
     header {
         padding: 18px 0 12px 0;
@@ -219,6 +275,11 @@ nav ul li button:hover {
     margin: 10px 18px 0 0;
     transition: background 0.3s;
     z-index: 10;
+}
+
+/* Hide animated overlay on small screens for performance */
+@media (max-width: 480px) {
+    body::before { display: none; }
 }
 
 /* Visit site button removed per request */
@@ -754,6 +815,31 @@ footer {
     background-color: #1f1f1f;
 }
 
+/* Footer version marker (small, muted) */
+.site-version {
+    margin: 6px 0 0 0;
+    font-size: 13px;
+    color: #7a7a7a;
+    letter-spacing: 0.4px;
+}
+.site-version .version-hash {
+    display: inline-block;
+    background: rgba(0,0,0,0.06);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    color: #222;
+    margin-left: 8px;
+}
+
+.dark .site-version {
+    color: #9e9e9e;
+}
+.dark .site-version .version-hash {
+    background: rgba(255,255,255,0.06);
+    color: #e6e6e6;
+}
+
 /* Contact Section Styles */
 .card#contact {
     position: relative;
@@ -1120,5 +1206,22 @@ footer {
     .button-text { font-size: 13px; }
     .about-buttons a img { width: 14px; }
     .skill-item img { width: 48px; height: 48px; }
+}
+
+/* Fix: ensure section headings/cards are visible under the sticky header
+   when using `scrollIntoView` or anchor links. Adjust `--header-offset`
+   if your header height changes. */
+:root {
+    --header-offset: 88px; /* approximate sticky header height + padding */
+}
+
+/* Apply offset to elements used as scroll targets (cards with ids) */
+.card {
+    scroll-margin-top: var(--header-offset);
+}
+
+/* Mobile: header may be taller on small screens — reduce offset slightly */
+@media (max-width: 480px) {
+    :root { --header-offset: 96px; }
 }
 
