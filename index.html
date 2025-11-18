@@ -24,6 +24,26 @@
                     <li><button onclick="scrollToSection('contact')">Contact</button></li>
                 </ul>
             </nav>
+            <!-- Mobile hamburger button -->
+            <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <!-- Mobile navigation drawer -->
+            <div id="mobileNav" class="mobile-nav" aria-hidden="true">
+                <button id="mobileNavClose" class="mobile-nav-close" aria-label="Close menu">×</button>
+                <ul>
+                    <li><a href="#about" onclick="scrollToSection('about'); closeMobileNav();">About</a></li>
+                    <li><a href="#experience" onclick="scrollToSection('experience'); closeMobileNav();">Experience</a></li>
+                    <li><a href="#projects" onclick="scrollToSection('projects'); closeMobileNav();">Projects</a></li>
+                    <li><a href="#education" onclick="scrollToSection('education'); closeMobileNav();">Education</a></li>
+                    <li><a href="#certifications" onclick="scrollToSection('certifications'); closeMobileNav();">Certifications</a></li>
+                    <li><a href="#skills" onclick="scrollToSection('skills'); closeMobileNav();">Skills</a></li>
+                    <li><a href="#contact" onclick="scrollToSection('contact'); closeMobileNav();">Contact</a></li>
+                </ul>
+            </div>
             <div id="themeToggle" class="toggle-container">
                 <div class="toggle-circle"></div>
             </div>
@@ -371,6 +391,41 @@
             if (section) {
                 section.scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        // Mobile menu controls
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+
+        function openMobileNav() {
+            document.body.classList.add('menu-open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            mobileNav.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeMobileNav() {
+            document.body.classList.remove('menu-open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileNav.setAttribute('aria-hidden', 'true');
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                if (expanded) closeMobileNav(); else openMobileNav();
+            });
+        }
+
+        if (mobileNavClose) {
+            mobileNavClose.addEventListener('click', closeMobileNav);
+        }
+
+        // Close mobile menu when clicking outside the menu content
+        if (mobileNav) {
+            mobileNav.addEventListener('click', (e) => {
+                if (e.target === mobileNav) closeMobileNav();
+            });
         }
     </script>
 </body>
