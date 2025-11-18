@@ -28,6 +28,47 @@ body.dark {
     color: #d1d1d1;
 }
 
+/* Animated modern background (subtle, behind content) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: linear-gradient(120deg, #00cea8 0%, #7ce0a8 30%, #ffd166 60%, #ff7a7a 100%);
+    background-size: 400% 400%;
+    filter: blur(40px) saturate(1.05);
+    opacity: 0.85;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    animation: bgShift 18s ease infinite;
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Slightly different tint in dark mode */
+body.dark::before {
+    background: linear-gradient(120deg, #0b3a2f 0%, #114d3f 30%, #3a2b00 60%, #2b1a1a 100%);
+    filter: blur(36px) saturate(0.9) brightness(0.6);
+    opacity: 0.7;
+}
+
+/* Reduce blur and animation intensity on small screens for performance */
+@media (max-width: 768px) {
+    body::before {
+        filter: blur(24px) saturate(1.02);
+        opacity: 0.95;
+        animation-duration: 28s;
+    }
+}
+
+@media (max-width: 420px) {
+    body::before { filter: blur(20px); animation-duration: 36s; }
+}
+
 a {
     text-decoration: none;
     color: inherit;
